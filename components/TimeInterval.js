@@ -1,11 +1,24 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 
-const TimeInterval = () => {
+const TimeInterval = ({ time, setTime, startStatus }) => {
   return (
     <View>
       <Text>Time Interval</Text>
-      <Text>This is for input and showing time</Text>
+      <TextInput
+        keyboardType="numeric"
+        onChangeText={(value) => setTime({ ...time, min: value.toString() })}
+        placeholder="Min"
+        value={time?.min}
+        editable={!startStatus}
+      />
+      <TextInput
+        keyboardType="numeric"
+        onChangeText={(value) => setTime({ ...time, sec: value.toString() })}
+        placeholder="Sec"
+        value={time?.sec}
+        editable={!startStatus}
+      />
     </View>
   );
 };

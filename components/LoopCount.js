@@ -1,11 +1,17 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 
-const LoopCount = () => {
+const LoopCount = ({ loopCount, setLoopCount, startStatus }) => {
   return (
     <View>
       <Text>This is for loop cont</Text>
-      <Text>Show counts of loops</Text>
+      <TextInput
+        keyboardType="numeric"
+        onChangeText={(value) => setLoopCount(value)}
+        placeholder="No of loops"
+        value={loopCount.toString()}
+        editable={!startStatus}
+      />
     </View>
   );
 };
