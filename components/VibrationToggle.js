@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 
 const VibrationToggle = ({ setUserSettings, userSettings, startStatus }) => {
   return (
@@ -7,7 +7,7 @@ const VibrationToggle = ({ setUserSettings, userSettings, startStatus }) => {
       <Text>This is for Vibration toggle</Text>
       <Text>
         Vibrate:
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => setUserSettings({ ...userSettings, vibrate: 'ON' })}
           disabled={startStatus}>
           <Text>ON</Text>
@@ -16,7 +16,17 @@ const VibrationToggle = ({ setUserSettings, userSettings, startStatus }) => {
           onPress={() => setUserSettings({ ...userSettings, vibrate: 'OFF' })}
           disabled={startStatus}>
           <Text>OFF</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <Button
+          onPress={() => setUserSettings({ ...userSettings, vibrate: 'ON' })}
+          disabled={startStatus}
+          title="ON"
+        />
+        <Button
+          onPress={() => setUserSettings({ ...userSettings, vibrate: 'OFF' })}
+          disabled={startStatus}
+          title="OFF"
+        />
       </Text>
     </View>
   );

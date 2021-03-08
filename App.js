@@ -12,13 +12,49 @@ const App = () => {
     soundFile: '',
     vibrate: 'ON',
   });
-  const [time, setTime] = useState({ min: '', sec: '' });
-  const [loopCount, setLoopCount] = useState(0);
+  const [time, setTime] = useState({ min: null, sec: null });
+  const [timeToShow, setTimeToShow] = useState({ min: null, sec: null });
+  const [loopCount, setLoopCount] = useState(null);
+  const [originalLoopCount, setOriginalLoopCount] = useState(0);
   const [startStatus, setStartStatus] = useState(false);
 
   useEffect(() => {
     console.log('GEt data from async storage if presnet');
   }, []);
+
+  useEffect(() => {
+    if (startStatus && loopCount >= 0) {
+      setTimeout(() => {
+        let seconds = parseInt(timeToShow.sec, 10);
+        let minutes = parseInt(timeToShow.min, 10);
+        seconds -= 10;
+        if (seconds < 0) {
+          seconds = 20;
+          minutes -= 1;
+          if (minutes < 0) {
+            console.log(minutes, seconds, loopCount);
+            minutes = parseInt(time.min, 10);
+
+            if (parseInt(loopCount, 10) <= 0) {
+              console.log('FINISHED');
+              setStartStatus(false);
+              seconds = parseInt(time.sec, 10);
+              setLoopCount(originalLoopCount);
+            } else {
+              setLoopCount(loopCount - 1);
+            }
+          }
+        }
+        setTimeToShow({ sec: seconds, min: minutes });
+      }, 1000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startStatus, timeToShow, time]);
+
+  useEffect(() => {
+    setOriginalLoopCount(loopCount);
+    setTimeToShow({ ...time });
+  }, [loopCount, time]);
 
   return (
     <View style={styles.container}>
@@ -32,7 +68,12 @@ const App = () => {
         userSettings={userSettings}
         startStatus={startStatus}
       />
-      <TimeInterval time={time} setTime={setTime} startStatus={startStatus} />
+      <TimeInterval
+        time={time}
+        setTime={setTime}
+        startStatus={startStatus}
+        timeToShow={timeToShow}
+      />
       <LoopCount
         loopCount={loopCount}
         setLoopCount={setLoopCount}

@@ -9,7 +9,7 @@ const LoopCount = ({ loopCount, setLoopCount, startStatus }) => {
         keyboardType="numeric"
         onChangeText={(value) => setLoopCount(value)}
         placeholder="No of loops"
-        value={loopCount.toString()}
+        value={loopCount?.toString()}
         editable={!startStatus}
       />
     </View>
