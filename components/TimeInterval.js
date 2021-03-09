@@ -1,10 +1,12 @@
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 
+import globalStyles from '../globalStyles';
+
 const TimeInterval = ({ time, setTime, startStatus, timeToShow }) => {
   return (
-    <View>
-      <Text>Time Interval</Text>
+    <View style={globalStyles.rowView}>
+      <Text style={globalStyles.rowTitle}>Time Interval</Text>
       <TextInput
         keyboardType="numeric"
         onChangeText={(value) => setTime({ ...time, min: value })}

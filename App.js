@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, Vibration, View } from 'react-native';
+import Sound from 'react-native-sound';
 
 import Buttons from './components/Buttons';
 import LoopCount from './components/LoopCount';
 import SelectSound from './components/SelectSound';
 import TimeInterval from './components/TimeInterval';
 import VibrationToggle from './components/VibrationToggle';
+import { BACKGROUND_COLOR, MAIN_COLOR, WHITE_COLOR } from './constant';
+import { vw } from './viewport';
 
 const App = () => {
   const [userSettings, setUserSettings] = useState({
-    soundFile: '',
+    soundFile: 'beep_2.wav',
     vibrate: 'ON',
   });
   const [time, setTime] = useState({ min: null, sec: null });
@@ -19,7 +22,8 @@ const App = () => {
   const [startStatus, setStartStatus] = useState(false);
 
   useEffect(() => {
-    console.log('GEt data from async storage if presnet');
+    // GET DATA FROM ASYNC STORAGE
+    Sound.setCategory('Playback');
   }, []);
 
   useEffect(() => {
@@ -34,9 +38,9 @@ const App = () => {
           if (minutes < 0) {
             console.log(minutes, seconds, loopCount);
             minutes = parseInt(time.min, 10);
+            PlaySoundVibrate();
 
             if (parseInt(loopCount, 10) <= 0) {
-              console.log('FINISHED');
               setStartStatus(false);
               seconds = parseInt(time.sec, 10);
               setLoopCount(originalLoopCount);
@@ -56,8 +60,28 @@ const App = () => {
     setTimeToShow({ ...time });
   }, [loopCount, time]);
 
+  const PlaySoundVibrate = () => {
+    const whoosh = new Sound(
+      userSettings.soundFile,
+      Sound.MAIN_BUNDLE,
+      (error) => {
+        if (error) {
+          console.log('Error:', error);
+          return;
+        }
+        whoosh.play();
+        if (userSettings.vibrate === 'ON') {
+          Vibration.vibrate(100);
+        }
+      },
+    );
+  };
+
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>CLoop</Text>
+      </View>
       <SelectSound
         setUserSettings={setUserSettings}
         userSettings={userSettings}
@@ -88,6 +112,21 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
+    backgroundColor: BACKGROUND_COLOR,
+  },
+  header: {
+    height: '8%',
+    width: '100%',
+    backgroundColor: WHITE_COLOR,
+    textAlign: 'center',
+    justifyContent: 'center',
+  },
+  headerText: {
+    color: MAIN_COLOR,
+    fontSize: 6 * vw,
+    fontFamily: 'Poppins',
+    fontWeight: 'bold',
+    paddingHorizontal: 3 * vw,
   },
 });
 
