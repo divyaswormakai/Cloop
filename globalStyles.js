@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { MAIN_COLOR, WHITE_COLOR } from './constant';
+import { GRAY_COLOR, INACTIVE_COLOR_BORDER, MAIN_COLOR, WHITE_COLOR } from './constant';
 import { vw } from './viewport';
 
 const globalStyles = StyleSheet.create({
@@ -26,6 +26,7 @@ const globalStyles = StyleSheet.create({
     color: 'white',
   },
 
+  //   Vibrate
   rowContent: {
     display: 'flex',
     flexDirection: 'row',
@@ -58,6 +59,62 @@ const globalStyles = StyleSheet.create({
   },
   inactiveInnerText: {
     color: MAIN_COLOR,
+  },
+
+  //   TimeInterval
+  col2: {
+    width: '50%',
+    flexDirection: 'row',
+  },
+  col4: {
+    width: '50%',
+    justifyContent: 'center',
+    textAlignVertical: 'bottom',
+    padding: 5,
+    fontSize: 3.75 * vw,
+  },
+  inputField: {
+    width: '50%',
+    borderWidth: 1,
+    borderRadius: 10,
+    textAlign: 'center',
+    borderColor: MAIN_COLOR,
+    fontSize: 5 * vw,
+    backgroundColor: WHITE_COLOR,
+  },
+  inputFieldDisabled: {
+    width: '50%',
+    borderWidth: 1,
+    borderRadius: 10,
+    textAlign: 'center',
+    fontSize: 5 * vw,
+    borderColor: INACTIVE_COLOR_BORDER,
+    backgroundColor: GRAY_COLOR,
+  },
+
+  // Buttons
+  primaryButton: {
+    backgroundColor: MAIN_COLOR,
+    paddingVertical: 3 * vw,
+    borderRadius: 10,
+  },
+  primaryButtonText: {
+    textAlign: 'center',
+    color: WHITE_COLOR,
+    fontSize: 5 * vw,
+  },
+  secondaryButton: {
+    backgroundColor: WHITE_COLOR,
+    paddingVertical: 3 * vw,
+    borderRadius: 10,
+    borderColor: MAIN_COLOR,
+    borderWidth: 2,
+    marginTop: 20,
+  },
+  secondaryButtonText: {
+    textAlign: 'center',
+    color: MAIN_COLOR,
+    fontSize: 5 * vw,
   },
 });
 

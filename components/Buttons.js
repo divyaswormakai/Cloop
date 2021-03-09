@@ -1,26 +1,35 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
+import globalStyles from '../globalStyles';
+
 const Buttons = ({ startStatus, setStartStatus }) => {
   return (
-    <View>
-      <Text>Let there be buttons</Text>
+    <View style={globalStyles.rowView}>
       {startStatus ? (
         <>
-          <TouchableOpacity onPress={() => setStartStatus(false)}>
-            <Text>Pause</Text>
+          <TouchableOpacity
+            onPress={() => setStartStatus(false)}
+            style={globalStyles.primaryButton}>
+            <Text style={globalStyles.primaryButtonText}>Pause</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setStartStatus(false)}>
-            <Text>Stop</Text>
+          <TouchableOpacity
+            onPress={() => setStartStatus(false)}
+            style={globalStyles.secondaryButton}>
+            <Text style={globalStyles.secondaryButtonText}>Stop</Text>
           </TouchableOpacity>
         </>
       ) : (
         <>
-          <TouchableOpacity onPress={() => setStartStatus(true)}>
-            <Text>Start</Text>
+          <TouchableOpacity
+            onPress={() => setStartStatus(true)}
+            style={globalStyles.primaryButton}>
+            <Text style={globalStyles.primaryButtonText}>Start</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text>Reset</Text>
+          <TouchableOpacity
+            onPress={() => setStartStatus(true)}
+            style={globalStyles.secondaryButton}>
+            <Text style={globalStyles.secondaryButtonText}>Reset</Text>
           </TouchableOpacity>
         </>
       )}
