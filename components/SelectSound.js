@@ -10,7 +10,12 @@ const SelectSound = ({ userSettings, setUserSettings, startStatus }) => {
   return (
     <View style={globalStyles.rowView}>
       <Text style={globalStyles.rowTitle}>Select the alert audio</Text>
-      <View style={globalStyles.pickerItemStyle}>
+      <View
+        style={
+          !startStatus
+            ? globalStyles.pickerItemStyle
+            : globalStyles.pickerInactiveItemStyle
+        }>
         <Picker
           selectedValue={userSettings.soundFile}
           onValueChange={(itemVal, itemInd) =>

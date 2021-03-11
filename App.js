@@ -20,6 +20,7 @@ const App = () => {
   const [loopCount, setLoopCount] = useState(null);
   const [originalLoopCount, setOriginalLoopCount] = useState(0);
   const [startStatus, setStartStatus] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     // GET DATA FROM ASYNC STORAGE
@@ -27,23 +28,22 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (startStatus && loopCount >= 0) {
+    if (startStatus && loopCount - 1 >= 0) {
       setTimeout(() => {
         let seconds = parseInt(timeToShow.sec, 10);
         let minutes = parseInt(timeToShow.min, 10);
         seconds -= 10;
         if (seconds < 0) {
-          seconds = 20;
+          seconds = 20; //59
           minutes -= 1;
           if (minutes < 0) {
-            console.log(minutes, seconds, loopCount);
             minutes = parseInt(time.min, 10);
             PlaySoundVibrate();
-
-            if (parseInt(loopCount, 10) <= 0) {
-              setStartStatus(false);
+            console.log('Loop', loopCount, minutes, seconds);
+            if (parseInt(loopCount, 10) <= 1) {
               seconds = parseInt(time.sec, 10);
               setLoopCount(originalLoopCount);
+              setStartStatus(false);
             } else {
               setLoopCount(loopCount - 1);
             }
@@ -53,12 +53,13 @@ const App = () => {
       }, 1000);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startStatus, timeToShow, time]);
+  }, [startStatus, timeToShow]);
 
   useEffect(() => {
     setOriginalLoopCount(loopCount);
     setTimeToShow({ ...time });
-  }, [loopCount, time]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [startStatus]);
 
   const PlaySoundVibrate = () => {
     const whoosh = new Sound(
@@ -75,6 +76,17 @@ const App = () => {
         }
       },
     );
+  };
+
+  const stopBtnPress = () => {
+    setStartStatus(false);
+  };
+
+  const resetBtnPress = () => {
+    setLoopCount(null);
+    setTime({ min: null, sec: null });
+    setTimeToShow({ min: null, sec: null });
+    setOriginalLoopCount(0);
   };
 
   return (
@@ -97,13 +109,23 @@ const App = () => {
         setTime={setTime}
         startStatus={startStatus}
         timeToShow={timeToShow}
+        isPaused={isPaused}
       />
       <LoopCount
         loopCount={loopCount}
         setLoopCount={setLoopCount}
         startStatus={startStatus}
+        originalLoopCount={originalLoopCount}
+        isPaused={isPaused}
       />
-      <Buttons startStatus={startStatus} setStartStatus={setStartStatus} />
+      <Buttons
+        startStatus={startStatus}
+        setStartStatus={setStartStatus}
+        stopBtnPress={stopBtnPress}
+        resetBtnPress={resetBtnPress}
+        isPaused={isPaused}
+        setIsPaused={setIsPaused}
+      />
     </View>
   );
 };

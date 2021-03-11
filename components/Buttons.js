@@ -3,7 +3,12 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import globalStyles from '../globalStyles';
 
-const Buttons = ({ startStatus, setStartStatus }) => {
+const Buttons = ({
+  startStatus,
+  setStartStatus,
+  stopBtnPress,
+  resetBtnPress,
+}) => {
   return (
     <View style={globalStyles.rowView}>
       {startStatus ? (
@@ -14,7 +19,7 @@ const Buttons = ({ startStatus, setStartStatus }) => {
             <Text style={globalStyles.primaryButtonText}>Pause</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => setStartStatus(false)}
+            onPress={stopBtnPress}
             style={globalStyles.secondaryButton}>
             <Text style={globalStyles.secondaryButtonText}>Stop</Text>
           </TouchableOpacity>
@@ -27,7 +32,7 @@ const Buttons = ({ startStatus, setStartStatus }) => {
             <Text style={globalStyles.primaryButtonText}>Start</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => setStartStatus(true)}
+            onPress={resetBtnPress}
             style={globalStyles.secondaryButton}>
             <Text style={globalStyles.secondaryButtonText}>Reset</Text>
           </TouchableOpacity>

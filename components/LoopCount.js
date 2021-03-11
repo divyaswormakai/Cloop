@@ -3,10 +3,10 @@ import { Text, TextInput, View } from 'react-native';
 
 import globalStyles from '../globalStyles';
 
-const LoopCount = ({ loopCount, setLoopCount, startStatus }) => {
+const LoopCount = ({ loopCount, setLoopCount, startStatus, isPaused }) => {
   return (
     <View style={globalStyles.rowView}>
-      <Text style={globalStyles.rowTitle}>Time Interval</Text>
+      <Text style={globalStyles.rowTitle}>Number of Loops</Text>
       <View style={globalStyles.rowContent}>
         <View style={globalStyles.col2}>
           <TextInput

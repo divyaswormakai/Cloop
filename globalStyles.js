@@ -25,6 +25,14 @@ const globalStyles = StyleSheet.create({
     overflow: 'hidden',
     color: 'white',
   },
+  pickerInactiveItemStyle: {
+    borderWidth: 2,
+    borderColor: INACTIVE_COLOR_BORDER,
+    borderStyle: 'solid',
+    borderRadius: 10,
+    overflow: 'hidden',
+    color: 'white',
+  },
 
   //   Vibrate
   rowContent: {
