@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, ToastAndroid, Vibration, View } from 'react-native';
 import Sound from 'react-native-sound';
+import SplashScreen from 'react-native-splash-screen';
 
 import Buttons from './components/Buttons';
 import LoopCount from './components/LoopCount';
@@ -23,6 +24,7 @@ const App = () => {
 
   useEffect(() => {
     // GET DATA FROM ASYNC STORAGE
+    SplashScreen.hide();
     Sound.setCategory('Playback');
   }, []);
 
@@ -70,7 +72,10 @@ const App = () => {
       ToastAndroid.show('Time is not set', ToastAndroid.SHORT);
       setStartStatus(false);
     } else {
-      if (!loopCount || loopCount?.length <= 0 || loopCount === '0') {
+      if (
+        (!loopCount || loopCount?.length <= 0 || loopCount === '0') &&
+        startStatus
+      ) {
         ToastAndroid.show('Please set number of loops', ToastAndroid.SHORT);
         setStartStatus(false);
       } else {
