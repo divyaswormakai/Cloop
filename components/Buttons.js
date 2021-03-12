@@ -13,11 +13,11 @@ const Buttons = ({
     <View style={globalStyles.rowView}>
       {startStatus ? (
         <>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => setStartStatus(false)}
             style={globalStyles.primaryButton}>
             <Text style={globalStyles.primaryButtonText}>Pause</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             onPress={stopBtnPress}
             style={globalStyles.secondaryButton}>

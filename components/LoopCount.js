@@ -3,7 +3,7 @@ import { Text, TextInput, View } from 'react-native';
 
 import globalStyles from '../globalStyles';
 
-const LoopCount = ({ loopCount, setLoopCount, startStatus, isPaused }) => {
+const LoopCount = ({ loopCount, setLoopCount, startStatus }) => {
   return (
     <View style={globalStyles.rowView}>
       <Text style={globalStyles.rowTitle}>Number of Loops</Text>
