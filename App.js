@@ -40,10 +40,10 @@ const App = () => {
           10,
         );
         console.log('Showing seconds,minutes', seconds, minutes, timeToShow);
-        seconds -= 10;
+        seconds -= 1;
 
         if (seconds < 0) {
-          seconds = 20; //59
+          seconds = 59;
           minutes -= 1;
           if (minutes < 0) {
             minutes = parseInt(time.min?.length <= 0 ? '0' : time.min, 10);
